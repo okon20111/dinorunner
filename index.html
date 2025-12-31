@@ -3,298 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dino Runner - Official Game</title>
+    <title>Dino Runner - Premiera</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        rajdhani: ['Rajdhani', 'sans-serif'],
+                    },
+                    colors: {
+                        neonGreen: '#00ff41',
+                        neonPink: '#ff00ff',
+                        neonBlue: '#00f3ff',
+                        darkBg: '#030305',
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'spin-slow': 'spin 10s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --primary: #00f2ff;
-            --secondary: #bd00ff;
-            --bg-dark: #050510;
-        }
-
         body {
-            font-family: 'Outfit', sans-serif;
-            background-color: var(--bg-dark);
-            color: white;
-            overflow: hidden;
-            perspective: 1000px;
+            background-color: #030305;
+            overflow: hidden; /* Prevent scrollbars from perspective transform */
+        }
+        
+        /* CRT Scanlines Effect */
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.1) 50%,
+                rgba(0,0,0,0.1)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.6;
         }
 
-        /* --- Tło Retro Grid --- */
-        .retro-grid-container {
+        /* Retro Perspective Grid */
+        .retro-grid {
             position: absolute;
-            width: 200%;
-            height: 130%;
             bottom: -30%;
             left: -50%;
-            transform: rotateX(60deg);
+            width: 200%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.3) 1px, transparent 1px);
+            background-size: 60px 60px;
+            transform: perspective(500px) rotateX(60deg);
+            animation: grid-move 4s linear infinite;
+            mask-image: linear-gradient(to top, black 20%, transparent 80%);
+            -webkit-mask-image: linear-gradient(to top, black 20%, transparent 80%);
             z-index: 0;
-            background: 
-                linear-gradient(transparent 0%, var(--bg-dark) 90%),
-                linear-gradient(90deg, rgba(189, 0, 255, 0.3) 1px, transparent 1px),
-                linear-gradient(0deg, rgba(0, 242, 255, 0.3) 1px, transparent 1px);
-            background-size: 100% 100%, 60px 60px, 60px 60px;
-            animation: gridMove 4s linear infinite;
         }
 
-        @keyframes gridMove {
-            0% { transform: rotateX(60deg) translateY(0); }
-            100% { transform: rotateX(60deg) translateY(60px); }
+        @keyframes grid-move {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 60px; }
         }
 
-        /* --- Oświetlenie --- */
-        .glow-sphere {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(120px);
-            z-index: 1;
-            opacity: 0.5;
-        }
-        .sphere-1 { top: -20%; left: 20%; width: 40vw; height: 40vw; background: var(--secondary); animation: pulse 8s ease-in-out infinite alternate; }
-        .sphere-2 { bottom: -20%; right: 20%; width: 50vw; height: 50vw; background: var(--primary); animation: pulse 8s ease-in-out infinite alternate-reverse; }
-
-        @keyframes pulse {
-            0% { opacity: 0.3; transform: scale(1); }
-            100% { opacity: 0.6; transform: scale(1.1); }
+        /* Glass Panel Enhanced */
+        .glass-panel {
+            background: rgba(10, 10, 15, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.1), inset 0 0 20px rgba(0,0,0,0.5);
         }
 
-        /* --- Główny Kontener --- */
-        .hero-card {
-            background: rgba(15, 15, 25, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 
-                0 0 50px -10px rgba(0,0,0,0.8),
-                inset 0 0 20px rgba(0, 242, 255, 0.05);
+        /* Glitch Title */
+        .glitch-text {
             position: relative;
-            z-index: 10;
-        }
-
-        /* --- Typografia Tytułu --- */
-        .title-font {
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            position: relative;
-        }
-        
-        .neon-text {
-            color: #fff;
-            text-shadow: 
-                0 0 10px rgba(0, 242, 255, 0.8),
-                0 0 20px rgba(0, 242, 255, 0.5),
-                0 0 40px rgba(189, 0, 255, 0.3);
-            background: linear-gradient(to bottom, #fff 0%, #a5f3fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .subtitle {
-            letter-spacing: 0.4em;
-            color: rgba(255,255,255,0.6);
-            font-size: 0.9rem;
-        }
-
-        /* --- Przycisk --- */
-        .cyber-btn {
-            position: relative;
-            background: transparent;
             color: white;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            letter-spacing: 2px;
-            overflow: hidden;
-            transition: 0.3s;
-            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
-            cursor: pointer;
-        }
-        
-        /* Tło przycisku (obramowanie) */
-        .cyber-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(45deg, var(--secondary), var(--primary));
-            z-index: -2;
-            transition: 0.3s;
+            text-shadow: 2px 2px 0px #ff00ff, -2px -2px 0px #00f3ff;
         }
 
-        /* Wnętrze przycisku (czarne tło) */
-        .cyber-btn::after {
-            content: '';
-            position: absolute;
-            top: 2px; left: 2px; right: 2px; bottom: 2px;
-            background: #0f172a;
-            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
-            z-index: -1;
-            transition: 0.3s;
+        /* Button Glow */
+        .btn-glow:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.6), 0 0 40px rgba(0, 255, 65, 0.3);
         }
 
-        .cyber-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
+        .bg-radial-gradient {
+            background: radial-gradient(circle at center, rgba(0, 243, 255, 0.15) 0%, transparent 70%);
         }
-
-        /* Wyłączenie hovera podczas pobierania */
-        .cyber-btn.downloading {
-            pointer-events: none;
-            transform: scale(1) !important;
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
-        }
-
     </style>
 </head>
-<body class="h-screen w-full flex items-center justify-center">
+<body class="text-white h-screen w-screen flex flex-col items-center justify-center relative font-rajdhani selection:bg-neonPink selection:text-white">
 
-    <!-- Efekty tła -->
-    <div class="glow-sphere sphere-1"></div>
-    <div class="glow-sphere sphere-2"></div>
-    <div class="retro-grid-container"></div>
+    <!-- Overlay Effects -->
+    <div class="scanlines"></div>
+    <div class="retro-grid"></div>
+    
+    <!-- Background Gradient Spot -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-radial-gradient pointer-events-none -z-10"></div>
 
-    <!-- Główna karta -->
-    <main class="w-full max-w-5xl px-6 flex justify-center items-center">
+    <!-- Main Content -->
+    <main class="relative z-20 w-full max-w-5xl px-4 flex flex-col items-center">
         
-        <div class="hero-card w-full max-w-xl rounded-2xl p-16 flex flex-col items-center justify-center text-center transform hover:translate-y-[-5px] transition-transform duration-500">
+        <!-- Logo / Icon -->
+        <div class="mb-6 animate-float relative">
+            <div class="absolute inset-0 bg-neonPink blur-[50px] opacity-20 rounded-full animate-pulse-fast"></div>
+            <i class="fa-solid fa-gamepad text-7xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-br from-neonBlue to-neonPink drop-shadow-[0_0_10px_rgba(0,243,255,0.8)]"></i>
+        </div>
+
+        <!-- Title -->
+        <h1 class="font-orbitron text-6xl md:text-8xl font-black text-center mb-2 tracking-widest uppercase italic transform -skew-x-6">
+            <span class="glitch-text block md:inline">DINO</span> 
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonGreen to-emerald-400 drop-shadow-[0_0_15px_rgba(0,255,65,0.5)]">RUNNER</span>
+        </h1>
+        
+        <div class="h-0.5 w-full max-w-md bg-gradient-to-r from-transparent via-neonBlue to-transparent mb-10 opacity-70"></div>
+
+        <!-- Main Message Card -->
+        <div class="glass-panel p-8 md:p-14 rounded-3xl w-full text-center border-t border-t-white/10 relative overflow-hidden group">
             
-            <!-- Dekoracyjny element UI -->
-            <div class="absolute top-4 left-4 flex gap-2">
-                <div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
-                <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
-                <div class="w-2 h-2 rounded-full bg-green-500"></div>
+            <!-- Card Decoration Corner -->
+            <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-neonBlue/20 to-transparent clip-path-corner"></div>
+            
+            <p class="text-xl md:text-2xl font-bold mb-8 text-gray-300 tracking-wider uppercase">
+                Status Systemu: <span class="text-neonGreen animate-pulse">Oczekiwanie na start</span>
+            </p>
+            
+            <div class="flex flex-col md:flex-row items-center justify-center gap-6 text-2xl md:text-3xl text-white mb-10 font-orbitron">
+                <div class="bg-black/60 px-6 py-3 rounded-lg border border-neonBlue/30 shadow-[0_0_15px_rgba(0,243,255,0.15)] flex items-center gap-3">
+                    <i class="fa-regular fa-clock text-neonBlue"></i>
+                    <span>22:30</span>
+                </div>
+                <span class="text-neonPink text-sm md:text-xl font-bold uppercase tracking-[0.2em] animate-pulse">Dzisiaj</span>
             </div>
 
-            <!-- Nagłówek -->
-            <div class="mb-14 relative group">
-                <p class="subtitle mb-2 font-bold uppercase text-cyan-400">Official Release</p>
-                <h1 class="title-font text-7xl md:text-9xl font-black neon-text select-none leading-none">
-                    DINO<br>
-                    <span class="text-5xl md:text-7xl opacity-90" style="-webkit-text-stroke: 1px rgba(255,255,255,0.3); -webkit-text-fill-color: transparent;">RUNNER</span>
-                </h1>
-                
-                <!-- Efekt 'glitch' pod tekstem -->
-                <div class="absolute -bottom-4 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50 blur-sm"></div>
+            <!-- Countdown Timer -->
+            <div class="grid grid-cols-3 gap-3 md:gap-6 max-w-xl mx-auto mb-10">
+                <div class="bg-black/80 p-4 rounded border-b-4 border-neonPink relative overflow-hidden group-hover:border-neonBlue transition-colors duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent"></div>
+                    <span id="hours" class="block text-4xl md:text-6xl font-orbitron font-bold text-white shadow-black drop-shadow-lg">--</span>
+                    <span class="text-[10px] md:text-xs text-neonPink uppercase tracking-widest mt-1">Godzin</span>
+                </div>
+                <div class="bg-black/80 p-4 rounded border-b-4 border-neonPink relative overflow-hidden group-hover:border-neonBlue transition-colors duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent"></div>
+                    <span id="minutes" class="block text-4xl md:text-6xl font-orbitron font-bold text-white shadow-black drop-shadow-lg">--</span>
+                    <span class="text-[10px] md:text-xs text-neonPink uppercase tracking-widest mt-1">Minut</span>
+                </div>
+                <div class="bg-black/80 p-4 rounded border-b-4 border-neonPink relative overflow-hidden group-hover:border-neonBlue transition-colors duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent"></div>
+                    <span id="seconds" class="block text-4xl md:text-6xl font-orbitron font-bold text-white shadow-black drop-shadow-lg">--</span>
+                    <span class="text-[10px] md:text-xs text-neonPink uppercase tracking-widest mt-1">Sekund</span>
+                </div>
             </div>
 
-            <!-- Przycisk z animacją -->
-            <button onclick="downloadGame()" class="cyber-btn group w-64 h-16 flex items-center justify-center text-lg mt-4 relative">
-                
-                <!-- Pasek postępu -->
-                <div id="progress-bar" class="absolute top-0 left-0 h-full w-0 bg-gradient-to-r from-cyan-600 to-blue-600 z-0 transition-all ease-out opacity-80"></div>
-
-                <!-- Treść domyślna -->
-                <span id="btn-content" class="relative z-10 flex items-center gap-3 group-hover:text-cyan-200 transition-all duration-300">
-                    POBIERZ
-                    <i data-lucide="download-cloud" class="w-5 h-5"></i>
-                </span>
-
-                <!-- Treść sukcesu -->
-                <span id="btn-success" class="absolute inset-0 z-20 flex items-center justify-center translate-y-10 opacity-0 transition-all duration-300 font-bold text-green-400">
-                    <i data-lucide="check-circle" class="w-6 h-6 mr-2"></i>
-                    GOTOWE
-                </span>
-            </button>
+            <!-- CTA / Status -->
+            <div class="relative inline-block w-full md:w-auto">
+                <div class="absolute -inset-1 bg-gradient-to-r from-neonGreen to-neonBlue blur opacity-30 group-hover:opacity-100 transition duration-500 rounded-full"></div>
+                <button id="notifyBtn" class="relative w-full md:w-auto px-10 py-4 bg-black rounded-full border border-neonGreen/50 text-white font-bold tracking-[0.15em] hover:text-neonGreen btn-glow transition-all duration-300 font-orbitron flex items-center justify-center">
+                    <i class="fa-solid fa-bell animate-bounce" style="animation-duration: 2s;"></i>
+                </button>
+            </div>
             
-            <p id="status-msg" class="mt-6 text-sm text-gray-500 font-mono opacity-0 transition-opacity duration-500">Oczekiwanie na akcję...</p>
-
+            <p id="statusMsg" class="mt-4 text-neonBlue text-sm font-bold opacity-0 transition-opacity duration-500 tracking-wider">
+                <i class="fa-solid fa-check mr-1"></i> POWIADOMIENIE AKTYWOWANE
+            </p>
         </div>
 
     </main>
 
+    <!-- Footer -->
+    <footer class="absolute bottom-4 text-center w-full text-white/30 text-xs font-rajdhani z-20">
+        &copy; 2025 DINO RUNNER STUDIO. SYSTEM READY.
+    </footer>
+
     <script>
-        lucide.createIcons();
-        
-        let isDownloading = false;
-
-        function downloadGame() {
-            if (isDownloading) return;
-            isDownloading = true;
-
-            const btn = document.querySelector('.cyber-btn');
-            const progressBar = document.getElementById('progress-bar');
-            const btnContent = document.getElementById('btn-content');
-            const btnSuccess = document.getElementById('btn-success');
-            const statusMsg = document.getElementById('status-msg');
-
-            // --- 1. START ANIMACJI ---
-            btn.classList.add('downloading');
+        // Countdown Logic
+        function updateCountdown() {
+            const now = new Date();
+            const target = new Date();
             
-            // Zmiana tekstu na "POBIERANIE..."
-            btnContent.innerHTML = `POBIERANIE... <i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i>`;
-            lucide.createIcons();
+            // Set target to today at 22:30
+            target.setHours(22, 30, 0, 0);
 
-            statusMsg.style.opacity = "1";
-            statusMsg.innerText = "Inicjowanie połączenia...";
-            statusMsg.className = "mt-6 text-sm font-mono opacity-100 transition-opacity duration-500 text-cyan-400";
-
-            // --- 2. PASEK POSTĘPU ---
-            // Krótkie opóźnienie, aby CSS transition zadziałał
-            setTimeout(() => {
-                progressBar.style.transitionDuration = "2500ms"; // Czas trwania "pobierania"
-                progressBar.style.width = "100%";
-            }, 50);
-
-            // --- 3. ZAKOŃCZENIE POBIERANIA ---
-            setTimeout(() => {
-                // Symulacja akcji pobierania
-                const link = document.createElement('a');
-                link.href = './dino.zip';
-                link.download = 'dino.zip';
-                document.body.appendChild(link);
+            // Logic: if current time is past 22:30, show "Available Now"
+            if (now > target) {
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('minutes').innerText = "00";
+                document.getElementById('seconds').innerText = "00";
                 
-                try {
-                    link.click();
-                    statusMsg.innerText = "Pobieranie zakończone!";
-                    statusMsg.classList.remove("text-cyan-400");
-                    statusMsg.classList.add("text-green-400");
-                } catch (e) {
-                    console.error("Błąd:", e);
-                    statusMsg.innerText = "Błąd pobierania.";
-                    statusMsg.classList.add("text-red-500");
-                }
-                document.body.removeChild(link);
+                const btn = document.getElementById('notifyBtn');
+                btn.innerHTML = '<span class="text-neonGreen"><i class="fa-solid fa-download mr-2"></i>POBIERZ TERAZ</span>';
+                btn.classList.add('border-neonGreen', 'shadow-[0_0_30px_rgba(0,255,65,0.4)]');
+                return;
+            }
 
-                // Zmiana UI na SUKCES
-                btnContent.style.transform = "translateY(-50px)";
-                btnContent.style.opacity = "0";
-                
-                btnSuccess.classList.remove("translate-y-10", "opacity-0");
-                
-                // Efekt poświaty sukcesu
-                btn.style.boxShadow = "0 0 50px rgba(52, 211, 153, 0.6)";
-                progressBar.classList.remove("from-cyan-600", "to-blue-600");
-                progressBar.classList.add("from-green-600", "to-emerald-600");
+            const diff = target - now;
 
-                // --- 4. RESET ---
-                setTimeout(() => {
-                    isDownloading = false;
-                    btn.classList.remove('downloading');
-                    
-                    // Reset paska (natychmiastowy, bez animacji)
-                    progressBar.style.transitionDuration = "0ms";
-                    progressBar.style.width = "0";
-                    progressBar.classList.add("from-cyan-600", "to-blue-600");
-                    progressBar.classList.remove("from-green-600", "to-emerald-600");
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-                    // Reset tekstów
-                    btnContent.style.transform = "translateY(0)";
-                    btnContent.style.opacity = "1";
-                    btnContent.innerHTML = `POBIERZ <i data-lucide="download-cloud" class="w-5 h-5"></i>`;
-                    lucide.createIcons();
-
-                    btnSuccess.classList.add("translate-y-10", "opacity-0");
-                    
-                    // Reset cienia i statusu
-                    btn.style.boxShadow = "";
-                    statusMsg.style.opacity = "0";
-                    
-                }, 3500); // Czas wyświetlania "GOTOWE"
-
-            }, 2500); // Musi pasować do transitionDuration paska
+            document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
         }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+
+        // Button Interaction
+        const btn = document.getElementById('notifyBtn');
+        const msg = document.getElementById('statusMsg');
+
+        btn.addEventListener('click', () => {
+            if(!btn.innerText.includes('POBIERZ')) {
+                // Click effect
+                btn.style.transform = "scale(0.95)";
+                setTimeout(() => btn.style.transform = "scale(1)", 150);
+                
+                // Change style to indicate success
+                btn.classList.remove('text-white');
+                btn.classList.add('text-neonBlue', 'border-neonBlue');
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> ZAPISANO';
+                
+                msg.classList.remove('opacity-0');
+                // Hide message after 3s
+                setTimeout(() => {
+                    msg.classList.add('opacity-0');
+                }, 3000);
+            }
+        });
     </script>
 </body>
 </html>
