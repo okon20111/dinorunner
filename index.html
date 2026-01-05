@@ -3,10 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> cb0c39b2f2877dfdc8e84b6d2aa170d70639e773
     <title>Dino Runner - Cyberpunk Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -166,161 +162,6 @@
             overflow: hidden;
             transition: 0.3s;
             clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-<<<<<<< HEAD
-        }
-
-        .btn-cyber:hover {
-            color: var(--bg-dark);
-            background: var(--primary);
-            box-shadow: 0 0 30px var(--primary);
-            text-shadow: none;
-        }
-
-        .btn-cyber::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
-            transition: 0.5s;
-        }
-
-        .btn-cyber:hover::before {
-            left: 100%;
-        }
-
-        .btn-cyber:active {
-            transform: scale(0.95);
-        }
-
-        /* --- DECORATIONS --- */
-        .tech-corner {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            border: 2px solid var(--primary);
-            transition: 0.3s;
-=======
-    <title>Dino Runner - Premiera</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        orbitron: ['Orbitron', 'sans-serif'],
-                        rajdhani: ['Rajdhani', 'sans-serif'],
-                    },
-                    colors: {
-                        neonGreen: '#00ff41',
-                        neonPink: '#ff00ff',
-                        neonBlue: '#00f3ff',
-                        darkBg: '#030305',
-                    },
-                    animation: {
-                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'spin-slow': 'spin 10s linear infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-15px)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            background-color: #030305;
-            overflow: hidden; /* Prevent scrollbars from perspective transform */
-        }
-        
-        /* CRT Scanlines Effect */
-        .scanlines {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(255,255,255,0),
-                rgba(255,255,255,0) 50%,
-                rgba(0,0,0,0.1) 50%,
-                rgba(0,0,0,0.1)
-            );
-            background-size: 100% 4px;
-            pointer-events: none;
-            z-index: 50;
-            opacity: 0.6;
-        }
-
-        /* Retro Perspective Grid */
-        .retro-grid {
-            position: absolute;
-            bottom: -30%;
-            left: -50%;
-            width: 200%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 243, 255, 0.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 243, 255, 0.3) 1px, transparent 1px);
-            background-size: 60px 60px;
-            transform: perspective(500px) rotateX(60deg);
-            animation: grid-move 4s linear infinite;
-            mask-image: linear-gradient(to top, black 20%, transparent 80%);
-            -webkit-mask-image: linear-gradient(to top, black 20%, transparent 80%);
-            z-index: 0;
-        }
-
-        @keyframes grid-move {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 60px; }
-        }
-
-        /* Glass Panel Enhanced */
-        .glass-panel {
-            background: rgba(10, 10, 15, 0.6);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(0, 243, 255, 0.2);
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.1), inset 0 0 20px rgba(0,0,0,0.5);
-        }
-
-        /* Glitch Title */
-        .glitch-text {
-            position: relative;
-            color: white;
-            text-shadow: 2px 2px 0px #ff00ff, -2px -2px 0px #00f3ff;
-        }
-
-        /* Button Glow */
-        .btn-glow:hover {
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.6), 0 0 40px rgba(0, 255, 65, 0.3);
->>>>>>> eac48f806b9a00157ba14677f29ee9ae46b90e9b
-        }
-        .tc-tl { top: 0; left: 0; border-right: none; border-bottom: none; }
-        .tc-tr { top: 0; right: 0; border-left: none; border-bottom: none; }
-        .tc-bl { bottom: 0; left: 0; border-right: none; border-top: none; }
-        .tc-br { bottom: 0; right: 0; border-left: none; border-top: none; }
-
-<<<<<<< HEAD
-        .cyber-card:hover .tech-corner {
-            width: 20px;
-            height: 20px;
-        }
-
-        .stat-box {
-            background: rgba(0, 242, 255, 0.05);
-            border-left: 2px solid var(--primary);
-        }
-
-=======
         }
 
         .btn-cyber:hover {
@@ -372,7 +213,6 @@
             border-left: 2px solid var(--primary);
         }
 
->>>>>>> cb0c39b2f2877dfdc8e84b6d2aa170d70639e773
         .loader-bar {
             position: absolute;
             bottom: 0;
@@ -447,15 +287,6 @@
                     <div id="btn-loader" class="loader-bar"></div>
                 </button>
             </div>
-<<<<<<< HEAD
-=======
-
-            <!-- Footer Decorative -->
-            <div class="mt-8 flex justify-between w-full opacity-30 text-[9px] font-mono tracking-widest text-cyan-100">
-                <span>SECURE CONNECTION</span>
-                <span>ID: 884-2X-99</span>
-            </div>
->>>>>>> cb0c39b2f2877dfdc8e84b6d2aa170d70639e773
 
             <!-- Footer Decorative -->
             <div class="mt-8 flex justify-between w-full opacity-30 text-[9px] font-mono tracking-widest text-cyan-100">
@@ -463,104 +294,10 @@
                 <span>ID: 884-2X-99</span>
             </div>
 
-=======
-        .bg-radial-gradient {
-            background: radial-gradient(circle at center, rgba(0, 243, 255, 0.15) 0%, transparent 70%);
-        }
-    </style>
-</head>
-<body class="text-white h-screen w-screen flex flex-col items-center justify-center relative font-rajdhani selection:bg-neonPink selection:text-white">
-
-    <!-- Overlay Effects -->
-    <div class="scanlines"></div>
-    <div class="retro-grid"></div>
-    
-    <!-- Background Gradient Spot -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-radial-gradient pointer-events-none -z-10"></div>
-
-    <!-- Main Content -->
-    <main class="relative z-20 w-full max-w-5xl px-4 flex flex-col items-center">
-        
-        <!-- Logo / Icon -->
-        <div class="mb-6 animate-float relative">
-            <div class="absolute inset-0 bg-neonPink blur-[50px] opacity-20 rounded-full animate-pulse-fast"></div>
-            <i class="fa-solid fa-gamepad text-7xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-br from-neonBlue to-neonPink drop-shadow-[0_0_10px_rgba(0,243,255,0.8)]"></i>
         </div>
-<<<<<<< HEAD
-
-        <!-- Title -->
-        <h1 class="font-orbitron text-6xl md:text-8xl font-black text-center mb-2 tracking-widest uppercase italic transform -skew-x-6">
-            <span class="glitch-text block md:inline">DINO</span> 
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonGreen to-emerald-400 drop-shadow-[0_0_15px_rgba(0,255,65,0.5)]">RUNNER</span>
-        </h1>
-        
-        <div class="h-0.5 w-full max-w-md bg-gradient-to-r from-transparent via-neonBlue to-transparent mb-10 opacity-70"></div>
-
-        <!-- Main Message Card -->
-        <div class="glass-panel p-8 md:p-14 rounded-3xl w-full text-center border-t border-t-white/10 relative overflow-hidden group">
-            
-            <!-- Card Decoration Corner -->
-            <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-neonBlue/20 to-transparent clip-path-corner"></div>
-            
-            <h2 class="text-2xl md:text-3xl font-bold mb-2 text-white font-orbitron tracking-wide">
-                Gra <span class="text-neonGreen">Dino Runner</span> będzie dostępna do pobrania
-            </h2>
-
-            <p class="text-sm md:text-base font-bold mb-8 text-gray-400 tracking-wider uppercase">
-                Status Systemu: <span class="text-neonBlue animate-pulse">Oczekiwanie na start</span>
-            </p>
-            
-            <div class="flex flex-col md:flex-row items-center justify-center gap-6 text-2xl md:text-3xl text-white mb-10 font-orbitron">
-                <div class="bg-black/60 px-6 py-3 rounded-lg border border-neonBlue/30 shadow-[0_0_15px_rgba(0,243,255,0.15)] flex items-center gap-3">
-                    <i class="fa-regular fa-clock text-neonBlue"></i>
-                    <span>22:30</span>
-                </div>
-                <span class="text-neonPink text-sm md:text-xl font-bold uppercase tracking-[0.2em] animate-pulse">Dzisiaj</span>
-            </div>
-
-            <!-- Countdown Timer -->
-            <div class="grid grid-cols-3 gap-3 md:gap-6 max-w-xl mx-auto mb-10">
-                <div class="bg-black/80 p-4 rounded border-b-4 border-neonPink relative overflow-hidden group-hover:border-neonBlue transition-colors duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent"></div>
-                    <span id="hours" class="block text-4xl md:text-6xl font-orbitron font-bold text-white shadow-black drop-shadow-lg">--</span>
-                    <span class="text-[10px] md:text-xs text-neonPink uppercase tracking-widest mt-1">Godzin</span>
-                </div>
-                <div class="bg-black/80 p-4 rounded border-b-4 border-neonPink relative overflow-hidden group-hover:border-neonBlue transition-colors duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent"></div>
-                    <span id="minutes" class="block text-4xl md:text-6xl font-orbitron font-bold text-white shadow-black drop-shadow-lg">--</span>
-                    <span class="text-[10px] md:text-xs text-neonPink uppercase tracking-widest mt-1">Minut</span>
-                </div>
-                <div class="bg-black/80 p-4 rounded border-b-4 border-neonPink relative overflow-hidden group-hover:border-neonBlue transition-colors duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent"></div>
-                    <span id="seconds" class="block text-4xl md:text-6xl font-orbitron font-bold text-white shadow-black drop-shadow-lg">--</span>
-                    <span class="text-[10px] md:text-xs text-neonPink uppercase tracking-widest mt-1">Sekund</span>
-                </div>
-            </div>
-
-            <!-- CTA / Status -->
-            <div class="relative inline-block w-full md:w-auto">
-                <div class="absolute -inset-1 bg-gradient-to-r from-neonGreen to-neonBlue blur opacity-30 group-hover:opacity-100 transition duration-500 rounded-full"></div>
-                <button id="notifyBtn" class="relative w-full md:w-auto px-10 py-4 bg-black rounded-full border border-neonGreen/50 text-white font-bold tracking-[0.15em] hover:text-neonGreen btn-glow transition-all duration-300 font-orbitron flex items-center justify-center">
-                    <i class="fa-solid fa-bell animate-bounce" style="animation-duration: 2s;"></i>
-                </button>
-            </div>
-            
-            <p id="statusMsg" class="mt-4 text-neonBlue text-sm font-bold opacity-0 transition-opacity duration-500 tracking-wider">
-                <i class="fa-solid fa-check mr-1"></i> POWIADOMIENIE AKTYWOWANE
-            </p>
->>>>>>> eac48f806b9a00157ba14677f29ee9ae46b90e9b
-        </div>
-=======
->>>>>>> cb0c39b2f2877dfdc8e84b6d2aa170d70639e773
     </main>
 
-    <!-- Footer -->
-    <footer class="absolute bottom-4 text-center w-full text-white/30 text-xs font-rajdhani z-20">
-        &copy; 2025 DINO RUNNER STUDIO. SYSTEM READY.
-    </footer>
-
     <script>
-<<<<<<< HEAD
         lucide.createIcons();
         let isDownloading = false;
 
@@ -616,67 +353,7 @@
                     statusText.innerText = 'ONLINE';
                 }, 3000);
             }, 2000);
-<<<<<<< HEAD
-=======
-        // Countdown Logic
-        function updateCountdown() {
-            const now = new Date();
-            const target = new Date();
-            
-            // Set target to today at 22:30
-            target.setHours(22, 30, 0, 0);
-
-            // Logic: if current time is past 22:30, show "Available Now"
-            if (now > target) {
-                document.getElementById('hours').innerText = "00";
-                document.getElementById('minutes').innerText = "00";
-                document.getElementById('seconds').innerText = "00";
-                
-                const btn = document.getElementById('notifyBtn');
-                btn.innerHTML = '<span class="text-neonGreen"><i class="fa-solid fa-download mr-2"></i>POBIERZ TERAZ</span>';
-                btn.classList.add('border-neonGreen', 'shadow-[0_0_30px_rgba(0,255,65,0.4)]');
-                return;
-            }
-
-            const diff = target - now;
-
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-            document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
->>>>>>> eac48f806b9a00157ba14677f29ee9ae46b90e9b
-=======
->>>>>>> cb0c39b2f2877dfdc8e84b6d2aa170d70639e773
         }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown(); // Initial call
-
-        // Button Interaction
-        const btn = document.getElementById('notifyBtn');
-        const msg = document.getElementById('statusMsg');
-
-        btn.addEventListener('click', () => {
-            if(!btn.innerText.includes('POBIERZ')) {
-                // Click effect
-                btn.style.transform = "scale(0.95)";
-                setTimeout(() => btn.style.transform = "scale(1)", 150);
-                
-                // Change style to indicate success
-                btn.classList.remove('text-white');
-                btn.classList.add('text-neonBlue', 'border-neonBlue');
-                btn.innerHTML = '<i class="fa-solid fa-check"></i> ZAPISANO';
-                
-                msg.classList.remove('opacity-0');
-                // Hide message after 3s
-                setTimeout(() => {
-                    msg.classList.add('opacity-0');
-                }, 3000);
-            }
-        });
     </script>
 
     <!-- FIREBASE LOGIC (UNCHANGED) -->
