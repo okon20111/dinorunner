@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> cb0c39b2f2877dfdc8e84b6d2aa170d70639e773
     <title>Dino Runner - Cyberpunk Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -163,6 +166,7 @@
             overflow: hidden;
             transition: 0.3s;
             clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+<<<<<<< HEAD
         }
 
         .btn-cyber:hover {
@@ -316,6 +320,59 @@
             border-left: 2px solid var(--primary);
         }
 
+=======
+        }
+
+        .btn-cyber:hover {
+            color: var(--bg-dark);
+            background: var(--primary);
+            box-shadow: 0 0 30px var(--primary);
+            text-shadow: none;
+        }
+
+        .btn-cyber::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-cyber:hover::before {
+            left: 100%;
+        }
+
+        .btn-cyber:active {
+            transform: scale(0.95);
+        }
+
+        /* --- DECORATIONS --- */
+        .tech-corner {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 2px solid var(--primary);
+            transition: 0.3s;
+        }
+        .tc-tl { top: 0; left: 0; border-right: none; border-bottom: none; }
+        .tc-tr { top: 0; right: 0; border-left: none; border-bottom: none; }
+        .tc-bl { bottom: 0; left: 0; border-right: none; border-top: none; }
+        .tc-br { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+        .cyber-card:hover .tech-corner {
+            width: 20px;
+            height: 20px;
+        }
+
+        .stat-box {
+            background: rgba(0, 242, 255, 0.05);
+            border-left: 2px solid var(--primary);
+        }
+
+>>>>>>> cb0c39b2f2877dfdc8e84b6d2aa170d70639e773
         .loader-bar {
             position: absolute;
             bottom: 0;
@@ -390,6 +447,15 @@
                     <div id="btn-loader" class="loader-bar"></div>
                 </button>
             </div>
+<<<<<<< HEAD
+=======
+
+            <!-- Footer Decorative -->
+            <div class="mt-8 flex justify-between w-full opacity-30 text-[9px] font-mono tracking-widest text-cyan-100">
+                <span>SECURE CONNECTION</span>
+                <span>ID: 884-2X-99</span>
+            </div>
+>>>>>>> cb0c39b2f2877dfdc8e84b6d2aa170d70639e773
 
             <!-- Footer Decorative -->
             <div class="mt-8 flex justify-between w-full opacity-30 text-[9px] font-mono tracking-widest text-cyan-100">
@@ -420,6 +486,7 @@
             <div class="absolute inset-0 bg-neonPink blur-[50px] opacity-20 rounded-full animate-pulse-fast"></div>
             <i class="fa-solid fa-gamepad text-7xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-br from-neonBlue to-neonPink drop-shadow-[0_0_10px_rgba(0,243,255,0.8)]"></i>
         </div>
+<<<<<<< HEAD
 
         <!-- Title -->
         <h1 class="font-orbitron text-6xl md:text-8xl font-black text-center mb-2 tracking-widest uppercase italic transform -skew-x-6">
@@ -483,6 +550,8 @@
             </p>
 >>>>>>> eac48f806b9a00157ba14677f29ee9ae46b90e9b
         </div>
+=======
+>>>>>>> cb0c39b2f2877dfdc8e84b6d2aa170d70639e773
     </main>
 
     <!-- Footer -->
@@ -547,6 +616,7 @@
                     statusText.innerText = 'ONLINE';
                 }, 3000);
             }, 2000);
+<<<<<<< HEAD
 =======
         // Countdown Logic
         function updateCountdown() {
@@ -578,6 +648,8 @@
             document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
             document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
 >>>>>>> eac48f806b9a00157ba14677f29ee9ae46b90e9b
+=======
+>>>>>>> cb0c39b2f2877dfdc8e84b6d2aa170d70639e773
         }
 
         setInterval(updateCountdown, 1000);
